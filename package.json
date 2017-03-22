@@ -1,0 +1,29 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon -w ./ -x npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cardbeat/voting-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cardbeat/voting-app/issues"
+  },
+  "homepage": "https://github.com/Cardbeat/voting-app#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1"
+  },
+  "devDependencies": {
+    "babel-register": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "nodemon": "^1.11.0"
+  }
+}
