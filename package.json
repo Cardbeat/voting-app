@@ -19,7 +19,8 @@
   "homepage": "https://github.com/Cardbeat/voting-app#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "mongoose": "^4.9.1"
+    "mongoose": "^4.9.1",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "babel-register": "^6.24.0",
