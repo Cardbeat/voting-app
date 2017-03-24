@@ -1,30 +1,25 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import  db from './db';
+import  db from './database/db';
 import passport from 'passport';
 import flash from 'connect-flash';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import react from 'express-react-views';
 
 const app= express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jsx');
-app.engine('jsx', react.createEngine('babel'));
-
-
+app.use(express.static('app/client/public'));
+app.set('views', 'app/client/views');
+app.set('view engine', 'pug');
 
 app.get('*', (req , res ) => {
-  console.log("enviado!");
-  res.render('index.jsx');
+  res.render('index');
 });
 
 const port = process.env.NODE_ENV || 3000;
