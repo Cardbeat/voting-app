@@ -1,0 +1,33 @@
+html
+  head
+    title Poll App
+    link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
+    script(type='text/javascript', src='/javascripts/login.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js')
+  body
+    header
+      nav.indigo
+        .nav-wrapper
+          a Poll App
+          ul#nav-mobile.right.hide-on-med-and-down
+            li
+              a(href='#') Register
+    main.login
+      .container
+        .row
+          form.col.s12(method='post', action='/users/login')
+            .row
+              .input-field.col.s6.offset-s3
+                input#username.validate(type='text', name='username')
+                label(for='name') Username
+            .row
+              .input-field.col.s6.offset-s3
+                input#password.validate(type='password', name='password')
+                label(for='password') Password
+            button.btn.btn-primary.col.s4.offset-s4.indigo(type='submit') login
+    footer.page-footer.indigo
+      .footer-copyright
+        .container
+          p © Copyright by Jefferson Oliveira 
