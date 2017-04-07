@@ -50,8 +50,6 @@ app.use(expressValidator({
 app.use(flash());
 
 
-//history
-
 app.set('views', './views');
 app.set('view engine', 'pug');
 

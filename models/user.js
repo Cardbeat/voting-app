@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import PollSchema from './poll.js'
 
 // User Schema
 const UserSchema = mongoose.Schema({
@@ -15,7 +16,8 @@ const UserSchema = mongoose.Schema({
 	},
 	name: {
 		type: String
-	}
+	},
+	polls: [PollSchema]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
