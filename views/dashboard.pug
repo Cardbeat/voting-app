@@ -6,17 +6,9 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js')
   body
-    header
-      nav.indigo
-        .nav-wrapper
-          a(href='/') Poll App
-          ul#nav-mobile.right.hide-on-med-and-down
-            li
-              a(href='/users/login') Log in
-            li
-              a(href='/users/register') Register
     main
-      h1 Poll App
+      div#app
+      script(src="/scripts/bundle.js")
       
     footer.page-footer.indigo
       .footer-copyright

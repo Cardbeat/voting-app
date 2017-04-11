@@ -2,8 +2,12 @@ import express from 'express';
 const router = express.Router();
 
 // Get Homepage
-router.get('/', ensureAuthenticated,(req, res) => {
-	res.render('index');
+router.get('/dashboard', ensureAuthenticated,(req, res) => {
+	res.render('dashboard');
+});
+
+router.get('/', (req,res) => {
+	res.render('index')
 });
 
 function ensureAuthenticated(req, res, next){
