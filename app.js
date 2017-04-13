@@ -9,6 +9,7 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import routes from './routes/index.js';
 import users from './routes/users.js';
+import polls from './routes/polls.js';
 import './database.js';
 
 const LocalStrategy = require('passport-local').Strategy;
@@ -73,6 +74,7 @@ app.use(express.static('public'));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/poll', polls)
 
 const port = 3000 || process.env.NODE_ENV;
 
