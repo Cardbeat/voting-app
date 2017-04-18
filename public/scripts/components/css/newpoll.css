@@ -1,8 +1,24 @@
 .card {
-  width: 500px;
   text-align: center;
   position: absolute;
+  width: 650px;
   top: 50%;
   left: 50%;
   transform: translate( -50%, -50%);
+}
+
+.remove-button {
+  margin-left: 20px;
+}
+
+.post-button {
+  position:relative;
+}
+
+.hit-button {
+  margin-top: 8px;
+}
+
+.choice-item {
+  margin-top: 20px;
 }

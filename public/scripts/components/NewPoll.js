@@ -13,21 +13,25 @@ export default class NewPoll extends React.Component {
     let choices = this.state.choices;
     choices = choices.map((item, index) => {
       return (
-        < Choice item={item} key={index} onDelete={this.onDelete.bind(this)} />
+        <Choice item={item} key={index} onDelete={this.onDelete.bind(this)} />
     );
   })
     return(
-      <div className="card">
+      <div className="card col s12">
         <div id="choice-list">
-          <form method="post" action="/newpoll">
+          <form method="post" className="col s12" action="/poll/newpoll">
             <div className="row">
-              <div class="input-field col s6">
-                <input placeholder="insert poll" id="first_name" type="text" className="validate" />
+              <button className="post-button btn btn-primary blue" type="submit">Create Poll</button>
+              <div className="input-field col s12">
+                <input id="InsertTitle" required type="text" className="validate" />
+                <label htmlFor="InsertTitle">Insert title</label>
               </div>
             </div>
           </form>
-          <ul>{choices}</ul>
-          <AddChoice onAdd={this.onAdd.bind(this)} />
+          <div className="row">
+            <ul >{choices}</ul>
+            <AddChoice onAdd={this.onAdd.bind(this)} />
+          </div>
         </div>
       </div>
     )
@@ -55,8 +59,11 @@ class AddChoice extends React.Component {
   render() {
     return (
       <form id="add-choice" onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Insert Option" required ref="newChoice" />
-        <input type="submit" value="Hit me"/>
+        <div className="input-field col s6 offset-s1">
+          <input className="choice-option" type="text" id="InsertOption" required ref="newChoice" name="choice" />
+          <label htmlFor="InsertOption">Insert Option</label>
+        </div>
+        <input className="hit-button col offset-s1 s3 offset-s1 btn btn-primary" type="submit" value="Add Option"/>
       </form>
     )
   }
@@ -71,10 +78,12 @@ class AddChoice extends React.Component {
 class Choice extends React.Component {
   render() {
     return (
-      <li>
+      <li className="row">
         <div className="choice-item">
-          <span className="choice-name">{this.props.item}</span>
-          <span className="choice-remove" onClick={this.handleDelete.bind(this)}><button className="remove-button">X</button></span>
+          <span className="choice-name col s8">{this.props.item}</span>
+          <div className="col s4">
+            <span className="choice-remove" onClick={this.handleDelete.bind(this)}><button className="remove-button btn btn-floating waves-effect red">X</button></span>
+          </div>
         </div>
       </li>
     )
