@@ -8,7 +8,7 @@ import express from 'express';
 const router = express.Router();
 
 // Get Homepage
-router.post('/newpoll', (req, res) => {
+router.post('/newpoll', (req, res) => { 
 	res.render('dashboard');
 });
 
