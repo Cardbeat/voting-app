@@ -23,13 +23,13 @@ export default class NewPoll extends React.Component {
             <div className="row">
               <button className="post-button btn btn-primary blue" type="submit">Create Poll</button>
               <div className="input-field col s12">
-                <input id="InsertTitle" required type="text" className="validate" />
+                <input id="InsertTitle" required type="text" className="validate" name="title" />
                 <label htmlFor="InsertTitle">Insert title</label>
               </div>
             </div>
+            <ul >{choices}</ul>
           </form>
           <div className="row">
-            <ul >{choices}</ul>
             <AddChoice onAdd={this.onAdd.bind(this)} />
           </div>
         </div>
@@ -60,7 +60,7 @@ class AddChoice extends React.Component {
     return (
       <form id="add-choice" onSubmit={this.handleSubmit.bind(this)}>
         <div className="input-field col s6 offset-s1">
-          <input className="choice-option" type="text" id="InsertOption" required ref="newChoice" name="choice" />
+          <input className="choice-option" type="text" id="InsertOption" required ref="newChoice" />
           <label htmlFor="InsertOption">Insert Option</label>
         </div>
         <input className="hit-button col offset-s1 s3 offset-s1 btn btn-primary" type="submit" value="Add Option"/>
@@ -80,7 +80,7 @@ class Choice extends React.Component {
     return (
       <li className="row">
         <div className="choice-item">
-          <span className="choice-name col s8">{this.props.item}</span>
+          <input className="choice-name col s8" value={this.props.item} name="choices"/>
           <div className="col s4">
             <span className="choice-remove" onClick={this.handleDelete.bind(this)}><button className="remove-button btn btn-floating waves-effect red">X</button></span>
           </div>

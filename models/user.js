@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema({
 	name: {
 		type: String
 	},
-	polls: [PollSchema]
+	polls: []
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

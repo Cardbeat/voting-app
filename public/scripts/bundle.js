@@ -10957,23 +10957,23 @@ var NewPoll = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'input-field col s12' },
-                _react2.default.createElement('input', { id: 'InsertTitle', required: true, type: 'text', className: 'validate' }),
+                _react2.default.createElement('input', { id: 'InsertTitle', required: true, type: 'text', className: 'validate', name: 'title' }),
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'InsertTitle' },
                   'Insert title'
                 )
               )
+            ),
+            _react2.default.createElement(
+              'ul',
+              null,
+              choices
             )
           ),
           _react2.default.createElement(
             'div',
             { className: 'row' },
-            _react2.default.createElement(
-              'ul',
-              null,
-              choices
-            ),
             _react2.default.createElement(AddChoice, { onAdd: this.onAdd.bind(this) })
           )
         )
@@ -11023,7 +11023,7 @@ var AddChoice = function (_React$Component2) {
         _react2.default.createElement(
           'div',
           { className: 'input-field col s6 offset-s1' },
-          _react2.default.createElement('input', { className: 'choice-option', type: 'text', id: 'InsertOption', required: true, ref: 'newChoice', name: 'choice' }),
+          _react2.default.createElement('input', { className: 'choice-option', type: 'text', id: 'InsertOption', required: true, ref: 'newChoice' }),
           _react2.default.createElement(
             'label',
             { htmlFor: 'InsertOption' },
@@ -11063,11 +11063,7 @@ var Choice = function (_React$Component3) {
         _react2.default.createElement(
           'div',
           { className: 'choice-item' },
-          _react2.default.createElement(
-            'span',
-            { className: 'choice-name col s8' },
-            this.props.item
-          ),
+          _react2.default.createElement('input', { className: 'choice-name col s8', value: this.props.item, name: 'choices' }),
           _react2.default.createElement(
             'div',
             { className: 'col s4' },
@@ -13112,7 +13108,7 @@ exports = module.exports = __webpack_require__(61)(undefined);
 
 
 // module
-exports.push([module.i, ".card {\n  text-align: center;\n  position: absolute;\n  width: 650px;\n  top: 50%;\n  left: 50%;\n  transform: translate( -50%, -50%);\n}\n\n.remove-button {\n  margin-left: 20px;\n}\n\n.post-button {\n  position:relative;\n}\n\n.hit-button {\n  margin-top: 8px;\n}\n\n.choice-item {\n  margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, ".card {\n  text-align: center;\n  position: absolute;\n  width: 650px;\n  top: 50%;\n  left: 50%;\n  transform: translate( -50%, -50%);\n}\n\n.remove-button {\n  margin-left: 20px;\n}\n\n.post-button {\n  position:relative;\n  margin-top: 10px;\n}\n\n.hit-button {\n  margin-top: 8px;\n}\n\n.choice-item {\n  margin-top: 20px;\n}\n", ""]);
 
 // exports
 
