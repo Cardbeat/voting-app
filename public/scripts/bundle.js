@@ -10957,7 +10957,7 @@ var NewPoll = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'input-field col s12' },
-                _react2.default.createElement('input', { id: 'InsertTitle', required: true, type: 'text', className: 'validate', name: 'title' }),
+                _react2.default.createElement('input', { id: 'InsertTitle', required: true, type: 'text', className: 'validate', name: 'question' }),
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'InsertTitle' },

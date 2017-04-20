@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const voteSchema = new Schema({ ip: 'String'});
-
 const choiceSchema = new Schema({
   text: String,
-  votes: [voteSchema]
+  votes: {type: Number, default: 0}
 });
 
 const PollSchema = new Schema({
   question: { type: String, required: true},
   choices: [choiceSchema]
 })
+
+module.exports = PollSchema
 
 const Poll = module.exports = mongoose.model('Poll', PollSchema);

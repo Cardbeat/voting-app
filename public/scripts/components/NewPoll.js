@@ -23,7 +23,7 @@ export default class NewPoll extends React.Component {
             <div className="row">
               <button className="post-button btn btn-primary blue" type="submit">Create Poll</button>
               <div className="input-field col s12">
-                <input id="InsertTitle" required type="text" className="validate" name="title" />
+                <input id="InsertTitle" required type="text" className="validate" name="question" />
                 <label htmlFor="InsertTitle">Insert title</label>
               </div>
             </div>

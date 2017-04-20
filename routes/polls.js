@@ -11,22 +11,37 @@ const router = express.Router();
 
 // Get Homepage
 router.post('/newpoll', (req, res) => {
-	// preciso criar um mapa pra ir criando todos os eschemas começando pelas opções e ir subindo, não se esqueça, você consegue !
+	// preciso criar um mapa pra ir criando todos os schemas começando pelas opções e ir subindo, não se esqueça, você consegue !
 	const question = req.body.question;
 	const choices = req.body.choices;
+	const choiceSchema = [];
 
+	choices.map(item => {
+		const choice = {
+			text: item
+		};
+		choiceSchema.push(choice);
+	});
 	const newPoll = new Poll({
 		question: question,
-		choices: choices
+		choices: choiceSchema
 	})
 	User.findOne({
 		email: req.user.email
-	}).then(result => {
-		result.polls.push(newPoll);
-		console.log(result.polls);
-	})
-	res.render('dashboard');
+	}).then(element => {
+		element.polls.push(newPoll);
+		newPoll.save();
+		const pollUrl = newPoll._id;
+		res.redirect('/poll/' + pollUrl);
+	});
 });
 
+router.get('/:id', (req, res) => {
+	Poll.find({
+		_id: req.params.id
+	}).then(poll => {
+		res.render('poll', poll);
+	})
+});
 
 module.exports = router;
