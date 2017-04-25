@@ -10861,13 +10861,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AllPolls = function (_React$Component) {
   _inherits(AllPolls, _React$Component);
 
-  function AllPolls() {
+  function AllPolls(props) {
     _classCallCheck(this, AllPolls);
 
-    return _possibleConstructorReturn(this, (AllPolls.__proto__ || Object.getPrototypeOf(AllPolls)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (AllPolls.__proto__ || Object.getPrototypeOf(AllPolls)).call(this, props));
+
+    _this.state = {
+      polls: []
+    };
+    return _this;
   }
 
   _createClass(AllPolls, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch('/poll/api/polls').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        _this2.setState({ polls: result.polls });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -10884,6 +10900,9 @@ var AllPolls = function (_React$Component) {
 
   return AllPolls;
 }(_react2.default.Component);
+// habilidade de deletar enquetes
+// criar caixa pra cada enquete com referencia ao link deles
+
 
 exports.default = AllPolls;
 

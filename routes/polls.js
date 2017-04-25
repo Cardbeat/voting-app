@@ -1,17 +1,22 @@
-// controlador de polls
-// dar o get pra todos os polls
-// dar o post pra criar e gerar o link adicionado ao componente
-// criar component new poll, criar component getAllPolls
-// usar shortid pra gerar o link
+//  habilidade de adicionar mais opções as enquetes..
 
 import express from 'express';
 import User from '../models/user';
 import Poll from '../models/poll';
 const router = express.Router();
 
-// Get Homepage
+
+router.get('/api/polls', (req, res) => {
+	const polls = req.sessionStore.sessions;
+	const id = JSON.parse(polls[Object.keys(polls)[0]]).passport.user;
+	User.findOne({_id: id})
+		.then(user => {
+			res.json({polls : user.polls});
+		})
+});
+
 router.post('/newpoll', (req, res) => {
-	// preciso criar um mapa pra ir criando todos os schemas começando pelas opções e ir subindo, não se esqueça, você consegue !
+
 	const question = req.body.question;
 	const choices = req.body.choices;
 	const choiceSchema = [];
@@ -40,7 +45,7 @@ router.get('/:id', (req, res) => {
 	Poll.find({
 		_id: req.params.id
 	}).then(poll => {
-		res.render('poll', poll);
+		res.render('poll', { question: poll[0].question, choices: poll[0].choices  });
 	})
 });
 

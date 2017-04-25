@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 // Get Homepage
-router.get('/dashboard', ensureAuthenticated,(req, res) => {
+router.get('/dashboard',ensureAuthenticated, (req, res) => {
 	res.render('dashboard');
 });
 

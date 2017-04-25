@@ -15,6 +15,10 @@ html
             li
               
     main
+      h1= question
+      ul
+        each item in choices
+          li= item.text
     footer.page-footer.indigo
       .footer-copyright
         .container
