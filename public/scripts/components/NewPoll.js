@@ -13,7 +13,9 @@ export default class NewPoll extends React.Component {
     let choices = this.state.choices;
     choices = choices.map((item, index) => {
       return (
-        <Choice item={item} key={index} onDelete={this.onDelete.bind(this)} />
+        <li>
+          <Choice item={item} key={index} onDelete={this.onDelete.bind(this)} />
+        </li>
     );
   })
     return(
@@ -27,7 +29,7 @@ export default class NewPoll extends React.Component {
                 <label htmlFor="InsertTitle">Insert title</label>
               </div>
             </div>
-            <ul >{choices}</ul>
+            <ul>{choices}</ul>
           </form>
           <div className="row">
             <AddChoice onAdd={this.onAdd.bind(this)} />

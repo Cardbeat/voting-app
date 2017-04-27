@@ -11,42 +11,57 @@ router.get('/api/polls', (req, res) => {
 	const id = JSON.parse(polls[Object.keys(polls)[0]]).passport.user;
 	User.findOne({_id: id})
 		.then(user => {
-			res.json({polls : user.polls});
+			res.json({user : user});
 		})
 });
 
 router.post('/newpoll', (req, res) => {
-
 	const question = req.body.question;
 	const choices = req.body.choices;
-	const choiceSchema = [];
-
+	const options = [];
+1
 	choices.map(item => {
 		const choice = {
-			text: item
+			text: item,
+			votes: 0
 		};
-		choiceSchema.push(choice);
+
+		options.push(choice);
 	});
+
 	const newPoll = new Poll({
 		question: question,
-		choices: choiceSchema
+		choices: options
 	})
-	User.findOne({
-		email: req.user.email
-	}).then(element => {
+
+	User.findOne({ email: req.user.email })
+		.then(element => {
 		element.polls.push(newPoll);
-		newPoll.save();
-		const pollUrl = newPoll._id;
-		res.redirect('/poll/' + pollUrl);
+	 	element.save();
+		res.redirect('/dashboard');
 	});
 });
 
-router.get('/:id', (req, res) => {
-	Poll.find({
-		_id: req.params.id
-	}).then(poll => {
-		res.render('poll', { question: poll[0].question, choices: poll[0].choices  });
-	})
+router.post('/remove', (req, res) => {
+});
+
+router.get('/:user/:id', (req, res) => {
+	User.findOne({_id:req.params.user})
+		.then((user) => {
+			let count = 0;
+			let pollObj = [];
+			user.polls.map(poll => {
+				if(poll._id == req.params.id) {
+					pollObj = poll;
+					count++
+				}
+			});
+			if(count === 0 ) {
+				console.log('no results found')
+			}
+			res.render('poll', {question: pollObj.question, choices: pollObj.choices});
+		});
+
 });
 
 module.exports = router;
