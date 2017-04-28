@@ -14,7 +14,7 @@ export default class AllPolls extends React.Component {
       .then(response => response.json())
       .then(result =>
         {
-          console.log(result.user.polls)
+          // console.log(result.user.polls)
          this.setState({
            polls: result.user.polls,
            user: result.user._id
@@ -23,6 +23,7 @@ export default class AllPolls extends React.Component {
   }
 
   onDelete(item) {
+    // make this function accept 2 args that will be the ID and User to delete via fetch
 
     // make this work plssssssss
 
