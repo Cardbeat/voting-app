@@ -10881,7 +10881,6 @@ var AllPolls = function (_React$Component) {
       fetch('/poll/api/polls').then(function (response) {
         return response.json();
       }).then(function (result) {
-        console.log(result.user.polls);
         _this2.setState({
           polls: result.user.polls,
           user: result.user._id
@@ -10890,17 +10889,18 @@ var AllPolls = function (_React$Component) {
     }
   }, {
     key: 'onDelete',
-    value: function onDelete(item) {
+    value: function onDelete(user, id, item) {
+      console.log(user + ' and ' + id);
+      fetch('remove/' + user + '/' + id, { method: 'post' }).then(function (response) {
+        response.json();
+      });
 
-      // make this work plssssssss
-
-      // let updatedPolls = this.state.polls.filter( (val, index) => {
-      //   return item !== val;
-      // })
-      // this.setState({
-      //   polls: updatedPolls
-      // })
-
+      var updatedPolls = this.state.polls.filter(function (val, index) {
+        return item !== val;
+      });
+      this.setState({
+        polls: updatedPolls
+      });
     }
   }, {
     key: 'render',
@@ -10911,8 +10911,8 @@ var AllPolls = function (_React$Component) {
       polls = polls.map(function (item, index) {
         return _react2.default.createElement(
           'li',
-          null,
-          _react2.default.createElement(Poll, { item: item, question: item.question, key: index, id: item._id, user: _this3.state.user, onDelete: _this3.onDelete.bind(_this3) })
+          { key: index },
+          _react2.default.createElement(Poll, { item: item, question: item.question, id: item._id, user: _this3.state.user, onDelete: _this3.onDelete.bind(_this3) })
         );
       });
       return _react2.default.createElement(
@@ -10971,14 +10971,12 @@ var Poll = function (_React$Component2) {
   }, {
     key: 'handleDelete',
     value: function handleDelete() {
-      this.props.onDelete(this.props.item);
+      this.props.onDelete(this.props.user, this.props.id, this.props.item);
     }
   }]);
 
   return Poll;
 }(_react2.default.Component);
-// habilidade de deletar enquetes
-// criar caixa pra cada enquete com referencia ao link deles
 
 /***/ }),
 /* 96 */
@@ -11028,11 +11026,7 @@ var NewPoll = function (_React$Component) {
 
       var choices = this.state.choices;
       choices = choices.map(function (item, index) {
-        return _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(Choice, { item: item, key: index, onDelete: _this2.onDelete.bind(_this2) })
-        );
+        return _react2.default.createElement(Choice, { item: item, key: index, onRemove: _this2.onRemove.bind(_this2) });
       });
       return _react2.default.createElement(
         'div',
@@ -11077,9 +11071,9 @@ var NewPoll = function (_React$Component) {
       );
     }
   }, {
-    key: 'onDelete',
-    value: function onDelete(item) {
-      var updatedChoices = this.state.choices.filter(function (val, index) {
+    key: 'onRemove',
+    value: function onRemove(item) {
+      var updatedChoices = this.state.choices.filter(function (val) {
         return item !== val;
       });
       this.setState({
@@ -11166,7 +11160,7 @@ var Choice = function (_React$Component3) {
             { className: 'col s4' },
             _react2.default.createElement(
               'span',
-              { className: 'choice-remove', onClick: this.handleDelete.bind(this) },
+              { className: 'choice-remove', onClick: this.handleRemove.bind(this) },
               _react2.default.createElement(
                 'button',
                 { className: 'remove-button btn btn-floating waves-effect red' },
@@ -11178,9 +11172,10 @@ var Choice = function (_React$Component3) {
       );
     }
   }, {
-    key: 'handleDelete',
-    value: function handleDelete() {
-      this.props.onDelete(this.props.item);
+    key: 'handleRemove',
+    value: function handleRemove(event) {
+      event.preventDefault();
+      this.props.onRemove(this.props.item);
     }
   }]);
 

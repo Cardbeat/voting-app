@@ -15,11 +15,10 @@ router.get('/api/polls', (req, res) => {
 		})
 });
 
-router.post('/newpoll', (req, res) => {
+ router.post('/newpoll', (req, res) => {
 	const question = req.body.question;
 	const choices = req.body.choices;
 	const options = [];
-1
 	choices.map(item => {
 		const choice = {
 			text: item,
@@ -38,11 +37,24 @@ router.post('/newpoll', (req, res) => {
 		.then(element => {
 		element.polls.push(newPoll);
 	 	element.save();
-		res.redirect('/dashboard');
+		res.redirect(`${element._id}/${newPoll._id}`);
 	});
 });
 
-router.post('/remove', (req, res) => {
+router.post('/remove/:user/:id', (req, res) => {
+	console.log(req.params)
+	User.findOne({_id:req.params.user})
+		.then((user) => {
+			let pollObj = [];
+			user.polls.map(poll => {
+				if(poll._id == req.params.id) {
+					user.polls.splice(user.polls.indexOf(poll),1)
+				}
+			});
+			user.save();
+			console.log(user.polls)
+			res.render('dashboard');
+		});
 });
 
 router.get('/:user/:id', (req, res) => {

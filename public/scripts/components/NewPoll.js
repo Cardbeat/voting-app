@@ -11,13 +11,11 @@ export default class NewPoll extends React.Component {
 
   render() {
     let choices = this.state.choices;
-    choices = choices.map((item, index) => {
+      choices = choices.map((item, index) => {
       return (
-        <li>
-          <Choice item={item} key={index} onDelete={this.onDelete.bind(this)} />
-        </li>
-    );
-  })
+          <Choice item={item} key={index} onRemove={this.onRemove.bind(this)} />
+      );
+    })
     return(
       <div className="card col s12">
         <div id="choice-list">
@@ -39,8 +37,8 @@ export default class NewPoll extends React.Component {
     )
   }
 
-  onDelete(item) {
-    let updatedChoices = this.state.choices.filter( (val, index) => {
+  onRemove(item) {
+    let updatedChoices = this.state.choices.filter( (val) => {
       return item !== val;
     })
     this.setState({
@@ -84,13 +82,14 @@ class Choice extends React.Component {
         <div className="choice-item">
           <input className="choice-name col s8" value={this.props.item} name="choices"/>
           <div className="col s4">
-            <span className="choice-remove" onClick={this.handleDelete.bind(this)}><button className="remove-button btn btn-floating waves-effect red">X</button></span>
+            <span className="choice-remove" onClick={this.handleRemove.bind(this)}><button className="remove-button btn btn-floating waves-effect red">X</button></span>
           </div>
         </div>
       </li>
     )
   }
-  handleDelete() {
-    this.props.onDelete(this.props.item);
+  handleRemove(event) {
+    event.preventDefault();
+    this.props.onRemove(this.props.item);
   }
 }
