@@ -13200,7 +13200,7 @@ exports = module.exports = __webpack_require__(61)(undefined);
 
 
 // module
-exports.push([module.i, ".card {\n  text-align: center;\n  position: absolute;\n  width: 650px;\n  top: 50%;\n  left: 50%;\n  transform: translate( -50%, -50%);\n}\n\n.remove-button {\n  margin-left: 20px;\n}\n\n.post-button {\n  position:relative;\n  margin-top: 10px;\n}\n\n.hit-button {\n  margin-top: 8px;\n}\n\n.choice-item {\n  margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, ".card {\n  text-align: center;\n  position: absolute;\n  width: 650px;\n  top: 40%;\n  left: 50%;\n  transform: translate( -50%, -50%);\n}\n\n.remove-button {\n  margin-left: 20px;\n}\n\n.post-button {\n  position:relative;\n  margin-top: 10px;\n}\n\n.hit-button {\n  margin-top: 8px;\n}\n\n.choice-item {\n  margin-top: 20px;\n}\n", ""]);
 
 // exports
 

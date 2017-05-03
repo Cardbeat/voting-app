@@ -6,4 +6,22 @@ body {
 
  main {
    flex: 1 0 auto;
+   text-align: center;
  }
+
+ .card {
+  text-align: center;
+  width: 650px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, 30%) 
+ }
+
+ .option {
+   margin-top: 5px;
+   text-align: left;
+ }
+
+

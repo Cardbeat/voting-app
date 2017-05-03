@@ -76,4 +76,9 @@ router.get('/:user/:id', (req, res) => {
 
 });
 
+router.post('/:user/:id', (req, res) => {
+	console.log(req.body.choice)
+	console.log(req.params)
+});
+
 module.exports = router;

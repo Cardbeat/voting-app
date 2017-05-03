@@ -9,15 +9,18 @@ html
     header
       nav.indigo
         .nav-wrapper
-          a Poll App
-          ul#nav-mobile.right.hide-on-med-and-down
-            li
-              
-    main
-      h1= question
-      ul
-        each item in choices
-          li= item.text
+          a(href="/") Poll App
+    main.col.s12.m7
+      div.row
+        div.card
+          h4= question
+          div.card-content
+            form(method="post")
+              each item in choices
+                p.option
+                  input(type="radio" id=item._id name="choice" value=item.text)
+                  label(for=item._id)= item.text
+              input(type="submit").btn.blue
     footer.page-footer.indigo
       .footer-copyright
         .container
