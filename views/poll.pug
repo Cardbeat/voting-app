@@ -18,7 +18,7 @@ html
             form(method="post")
               each item in choices
                 p.option
-                  input(type="radio" id=item._id name="choice" value=item.text)
+                  input(type="radio" id=item._id name="choice" value=choices.indexOf(item))
                   label(for=item._id)= item.text
               input(type="submit").btn.blue
     footer.page-footer.indigo

@@ -45,7 +45,6 @@ router.post('/remove/:user/:id', (req, res) => {
 	console.log(req.params)
 	User.findOne({_id:req.params.user})
 		.then((user) => {
-			let pollObj = [];
 			user.polls.map(poll => {
 				if(poll._id == req.params.id) {
 					user.polls.splice(user.polls.indexOf(poll),1)
@@ -77,8 +76,17 @@ router.get('/:user/:id', (req, res) => {
 });
 
 router.post('/:user/:id', (req, res) => {
-	console.log(req.body.choice)
-	console.log(req.params)
+	// make this work
+	User.findOne({_id : req.params.user})
+		.then((user) => {
+			user.polls.map( poll => {
+				if(poll._id == req.params.id) {
+					poll.choices[req.body.choice].votes.push("voto");
+				}
+			});
+			console.log(user.polls)
+		});
+	User.save();
 });
 
 module.exports = router;
