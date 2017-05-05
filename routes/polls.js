@@ -15,14 +15,14 @@ router.get('/api/polls', (req, res) => {
 		})
 });
 
- router.post('/newpoll', (req, res) => {
+router.post('/newpoll', (req, res) => {
 	const question = req.body.question;
 	const choices = req.body.choices;
 	const options = [];
 	choices.map(item => {
 		const choice = {
 			text: item,
-			votes: 0
+			votes: []
 		};
 
 		options.push(choice);
@@ -31,18 +31,16 @@ router.get('/api/polls', (req, res) => {
 	const newPoll = new Poll({
 		question: question,
 		choices: options
-	})
+	}, { strict: false })
 
 	User.findOne({ email: req.user.email })
 		.then(element => {
 		element.polls.push(newPoll);
-	 	element.save();
 		res.redirect(`${element._id}/${newPoll._id}`);
 	});
 });
 
 router.post('/remove/:user/:id', (req, res) => {
-	console.log(req.params)
 	User.findOne({_id:req.params.user})
 		.then((user) => {
 			user.polls.map(poll => {
@@ -51,7 +49,6 @@ router.post('/remove/:user/:id', (req, res) => {
 				}
 			});
 			user.save();
-			console.log(user.polls)
 			res.render('dashboard');
 		});
 });
@@ -76,17 +73,17 @@ router.get('/:user/:id', (req, res) => {
 });
 
 router.post('/:user/:id', (req, res) => {
-	// make this work
 	User.findOne({_id : req.params.user})
 		.then((user) => {
-			user.polls.map( poll => {
+			user.polls.map( (poll) => {
 				if(poll._id == req.params.id) {
-					poll.choices[req.body.choice].votes.push("voto");
+					let newVote = poll.choices[req.body.choice].votes;
+					newVote.push(req.ip);
+					console.log(poll.choices[req.body.choice].votes)
 				}
 			});
-			console.log(user.polls)
-		});
-	User.save();
+			user.save();
+		})
 });
 
 module.exports = router;
