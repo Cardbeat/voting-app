@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import {Poll, PollSchema} from './poll.js'
+import Poll from './poll.js'
 
 // User Schema
 const UserSchema = mongoose.Schema({

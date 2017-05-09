@@ -1,5 +1,3 @@
-//  habilidade de adicionar mais opções as enquetes..
-
 import express from 'express';
 import User from '../models/user';
 import Poll from '../models/poll';
@@ -22,7 +20,7 @@ router.post('/newpoll', (req, res) => {
 	choices.map(item => {
 		const choice = {
 			text: item,
-			votes: []
+			votes: 0
 		};
 
 		options.push(choice);
@@ -30,12 +28,14 @@ router.post('/newpoll', (req, res) => {
 
 	const newPoll = new Poll({
 		question: question,
-		choices: options
+		choices: options,
+		ip: []
 	}, { strict: false })
 
 	User.findOne({ email: req.user.email })
 		.then(element => {
 		element.polls.push(newPoll);
+		element.save();
 		res.redirect(`${element._id}/${newPoll._id}`);
 	});
 });
@@ -55,7 +55,7 @@ router.post('/remove/:user/:id', (req, res) => {
 
 router.get('/:user/:id', (req, res) => {
 	User.findOne({_id:req.params.user})
-		.then((user) => {
+		.then( user => {
 			let count = 0;
 			let pollObj = [];
 			user.polls.map(poll => {
@@ -73,17 +73,21 @@ router.get('/:user/:id', (req, res) => {
 });
 
 router.post('/:user/:id', (req, res) => {
-	User.findOne({_id : req.params.user})
-		.then((user) => {
-			user.polls.map( (poll) => {
-				if(poll._id == req.params.id) {
-					let newVote = poll.choices[req.body.choice].votes;
-					newVote.push(req.ip);
+	User.findById(req.params.user)
+		.then(user => {
+			user.polls.map(poll => {
+				if(poll._id == req.params.id && poll.ip.indexOf(req.ip) === -1) {
+					console.log(poll.ip);
+					poll.ip.push(req.ip);
+					poll.choices[req.body.choice].votes++;
+					user.markModified('polls');
+					user.save();
 					console.log(poll.choices[req.body.choice].votes)
+				}else {
+					console.log('You already voted for this poll');
 				}
 			});
-			user.save();
-		})
+		});
 });
 
 module.exports = router;
