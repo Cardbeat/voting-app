@@ -10738,6 +10738,10 @@ var _Welcome2 = _interopRequireDefault(_Welcome);
 
 var _reactRouterDom = __webpack_require__(203);
 
+var _createBrowserHistory = __webpack_require__(117);
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
 __webpack_require__(227);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -10747,6 +10751,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var history = (0, _createBrowserHistory2.default)();
 
 var Dashboard = function (_React$Component) {
   _inherits(Dashboard, _React$Component);
@@ -10762,7 +10768,7 @@ var Dashboard = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactRouterDom.BrowserRouter,
-        null,
+        { history: history },
         _react2.default.createElement(
           'div',
           null,

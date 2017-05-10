@@ -13,6 +13,14 @@ router.get('/api/polls', (req, res) => {
 		})
 });
 
+router.get('/newpoll', ensureAuthenticated, (req, res) => {
+	res.redirect('/users/login');
+});
+
+router.get('/polls', ensureAuthenticated, (req, res) => {
+	res.redirect('/users/login');
+});
+
 router.post('/newpoll', (req, res) => {
 	const question = req.body.question;
 	const choices = req.body.choices;
@@ -67,7 +75,7 @@ router.get('/:user/:id', (req, res) => {
 			if(count === 0 ) {
 				console.log('no results found')
 			}
-			res.render('poll', {question: pollObj.question, choices: pollObj.choices});
+			res.render('poll', {question: pollObj.question, choices: pollObj.choices, req: req});
 		});
 
 });
@@ -84,10 +92,19 @@ router.post('/:user/:id', (req, res) => {
 					user.save();
 					console.log(poll.choices[req.body.choice].votes)
 				}else {
-					console.log('You already voted for this poll');
+					req.toastr.error('You alredy voted');
+					res.redirect(req.get('referer'));
 				}
 			});
 		});
 });
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		res.redirect('/users/login');
+	}
+}
 
 module.exports = router;

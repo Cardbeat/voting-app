@@ -3,13 +3,15 @@ import NewPoll from './NewPoll.js';
 import AllPolls from './AllPolls.js';
 import Welcome from './Welcome.js'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import './css/dashboard.css'
 
+const history = createBrowserHistory()
 
 export default class Dashboard extends React.Component {
   render() {
     return (
-      <Router>
+      <Router history={history} >
         <div>
           <nav>
             <div className="nav-wrapper indigo">

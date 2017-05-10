@@ -11,6 +11,7 @@ import routes from './routes/index.js';
 import users from './routes/users.js';
 import polls from './routes/polls.js';
 import './database.js';
+import toastr from 'express-toastr';
 
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
@@ -49,25 +50,16 @@ app.use(expressValidator({
 
 // Connect Flash
 app.use(flash());
+app.use(toastr());
 
 
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-
-// Global Vars
-app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null;
-  next();
-});
-
 // BodyParser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('itsapoll'));
 app.use(express.static('public'));
 
 // Routes
