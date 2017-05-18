@@ -11,7 +11,7 @@ html
     header
       nav.indigo
         .nav-wrapper
-          a(href="/") Poll App
+          a(href="/dashboard") Poll App
     main.col.s12.m7
       div#toastr
         #{req.toastr.render()}
@@ -24,8 +24,12 @@ html
                 p.option
                   input(type="radio" id=item._id name="choice" value=choices.indexOf(item))
                   label(for=item._id)= item.text
-              input(type="submit").btn.blue
+              div.input-field.left-align
+                input(type="radio" id="option" name="choice" )
+                label(for="option")
+                  input(type="text" id="option" name="choice")
+              button(type="submit").btn.blue Vote
     footer.page-footer.indigo
-      .footer-copyright
-        .container
+      div.footer-copyright
+        div.container
           p © Copyright by Jefferson Oliveira 

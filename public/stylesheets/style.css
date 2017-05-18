@@ -27,3 +27,7 @@ body {
 #toastr {
    display:none;
 }
+
+.newoption {
+  vertical-align: left;
+}

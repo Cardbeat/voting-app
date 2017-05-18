@@ -1,5 +1,7 @@
 import React from 'react';
-import './css/newpoll.css'
+import './css/newpoll.css';
+import Choice from './Choice.js';
+import AddChoice from './AddChoice.js';
 
 export default class NewPoll extends React.Component {
   constructor(props) {
@@ -52,44 +54,5 @@ export default class NewPoll extends React.Component {
     this.setState({
       choices: updatedChoices
     })
-  }
-}
-
-class AddChoice extends React.Component {
-  render() {
-    return (
-      <form id="add-choice" onSubmit={this.handleSubmit.bind(this)}>
-        <div className="input-field col s6 offset-s1">
-          <input className="choice-option" type="text" id="InsertOption" required ref="newChoice" />
-          <label htmlFor="InsertOption">Insert Option</label>
-        </div>
-        <input className="hit-button col offset-s1 s3 offset-s1 btn btn-primary" type="submit" value="Add Option"/>
-      </form>
-    )
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.onAdd(this.refs.newChoice.value);
-    this.refs.newChoice.value = '';
-  }
-}
-
-
-class Choice extends React.Component {
-  render() {
-    return (
-      <li className="row">
-        <div className="choice-item">
-          <input className="choice-name col s8" value={this.props.item} name="choices"/>
-          <div className="col s4">
-            <span className="choice-remove" onClick={this.handleRemove.bind(this)}><button className="remove-button btn btn-floating waves-effect red">X</button></span>
-          </div>
-        </div>
-      </li>
-    )
-  }
-  handleRemove(event) {
-    event.preventDefault();
-    this.props.onRemove(this.props.item);
   }
 }
