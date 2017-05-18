@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth0-id-generator": "0.0.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "connect-flash": "^0.1.1",
@@ -37,6 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.0",
     "nodemon": "^1.11.0",
+    "standard": "^10.0.2",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3"
   }

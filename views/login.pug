@@ -15,19 +15,19 @@ html
             li
               a(href='/users/register') Register
     main.login
-      .container
-        .row
+      div.container
+        div.row
           form.col.s12(method='post', action='/users/login')
-            .row
-              .input-field.col.s6.offset-s3
+            div.row
+              div.input-field.col.s6.offset-s3
                 input#username.validate(type='text', name='username')
                 label(for='name') Username
-            .row
-              .input-field.col.s6.offset-s3
+            div.row
+              div.input-field.col.s6.offset-s3
                 input#password.validate(type='password', name='password')
                 label(for='password') Password
             button.btn.btn-primary.col.s4.offset-s4.indigo(type='submit') login
     footer.page-footer.indigo
-      .footer-copyright
-        .container
+      div.footer-copyright
+        div.container
           p © Copyright by Jefferson Oliveira 
