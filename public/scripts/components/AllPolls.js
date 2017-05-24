@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/allpolls.css';
 
 export default class AllPolls extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ export default class AllPolls extends React.Component {
   }
 
   onDelete(user, id, item ) {
-    console.log(`${user} and ${id}`);
     fetch(`remove/${user}/${id}`, {method: 'post'})
       .then(response => { response.json() });
 
@@ -39,14 +39,15 @@ export default class AllPolls extends React.Component {
     let polls = this.state.polls;
     polls = polls.map((item, index) => {
       return (
-        <li key={index} >
-          <Poll item={item} question={item.question} id={item._id} user={this.state.user} onDelete={this.onDelete.bind(this)} />
-        </li>
+        <div>
+          <li key={index} className="col s12 section" >
+            <Poll item={item} question={item.question} id={item._id} user={this.state.user} onDelete={this.onDelete.bind(this)} />
+          </li>
+        </div>
       );
     })
     return (
       <div>
-        <h2> this will be a list to show all the polls</h2>
         <ul>
           {polls}
         </ul>
@@ -60,9 +61,10 @@ export default class AllPolls extends React.Component {
 class Poll extends React.Component {
   render() {
     return (
-      <div>
+      <div className="block">
+        <div></div>
         <a target='_blank' href={'/poll/' + this.props.user + '/' + this.props.id}>{this.props.question}</a>
-        <span onClick={this.handleDelete.bind(this)}><button>X</button></span>
+        <span onClick={this.handleDelete.bind(this)}><button className="btn">X</button></span>
       </div>
   )
   }
