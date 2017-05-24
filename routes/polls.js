@@ -62,10 +62,8 @@ router.get('/:user/:id', (req, res) => {
 			let count = 0;
 			let pollObj = [];
 			user.polls.map(poll => {
-				if(poll._id == req.params.id) {
 					pollObj = poll;
 					count++
-				}
 			});
 			if(count === 0 ) {
 				console.log('no results found')
@@ -76,12 +74,12 @@ router.get('/:user/:id', (req, res) => {
 });
 
 router.post('/:user/:id', (req, res) => {
-	console.log(req.body.choice)
 	User.findById(req.params.user)
 		.then(user => {
 			user.polls.map(poll => {
-				if(poll._id == req.params.id && poll.ip.indexOf(req.ip) === -1) {
-					if(req.body.choice.length > 1 ) {
+				console.log(poll)
+				if(poll._id == req.params.id && poll.ip.indexOf(req.ip) == -1) {
+					if(req.body.choice[0] === 'on' ) {
 						const id = generator.newUid(10);
 						const newChoice = {
 							_id: id,
@@ -92,22 +90,42 @@ router.post('/:user/:id', (req, res) => {
 						poll.choices.push(newChoice);
 						user.markModified('polls');
 						user.save();
-						console.log(poll.choices)
-						req.toastr.success('Thanks for the vote !');
-						return res.redirect(req.get('referer'));
+						res.redirect(`/poll/${req.params.user}/${req.params.id}/result`);
 					} else {
-						console.log(poll.ip);
 						poll.ip.push(req.ip);
-						poll.choices[req.body.choice].votes++;
+						poll.choices[req.body.choice[0]].votes++;
 						user.markModified('polls');
 						user.save();
-						console.log(poll.choices[req.body.choice].votes)
-						req.toastr.success('Thanks for the vote !');
-						return res.redirect(req.get('referer'));
+						res.redirect(`/poll/${req.params.user}/${req.params.id}/result`);
 					}
-				}else {
-					req.toastr.error('You alredy voted');
-					return res.redirect(req.get('referer'));
+				}else if(poll.ip.indexOf(req.ip) !== -1) {
+					res.redirect(`/poll/${req.params.user}/${req.params.id}/result`);
+				}
+			});
+		});
+});
+
+router.get('/:user/:id/result', (req, res) => {
+	console.log('works');
+	User.findById(req.params.user)
+		.then(user => {
+			user.polls.map(poll => {
+				if(poll._id == req.params.id) {
+					console.log(poll)
+					const result = [];
+					const total = [];
+					poll.choices.map(choice => {
+						const data = {
+							option: choice.text,
+							votes: choice.votes,
+						};
+						total.push(choice.votes);
+						result.push(data);
+					});
+					const totalVotes = total.reduce((a,b) => {
+							return a + b;
+						})
+					res.render('result', { poll : result, total: totalVotes});
 				}
 			});
 		});

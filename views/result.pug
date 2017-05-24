@@ -3,22 +3,23 @@ html
     title Poll App
     link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js')
   body
     header
       nav.indigo
         .nav-wrapper
-          a(href="/dashboard")  Poll App
-          ul#nav-mobile.right.hide-on-med-and-down
-            li
-              a(href='/users/login') Log in
-            li
-              a(href='/users/register') Register
-    main
-      h1 Poll App
+          a(href="/dashboard") Poll App
+    main.col.s12.m7
+      each item in poll
+        p= item.option
+        span= item.votes / total * 100 + '%'
+    
+    p= 'total votes: ' + total
       
     footer.page-footer.indigo
-      .footer-copyright
-        .container
+      div.footer-copyright
+        div.container
           p © Copyright by Jefferson Oliveira 
